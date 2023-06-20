@@ -19,8 +19,13 @@ import {
 import { auth } from "../configs/firebase";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useEffect } from "react";
+import { useNotification } from "../contexts/NotificationContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
+  const { handleNotificationMsg } = useNotification();
   const isSmall = useMediaQuery("(max-width: 576px)");
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
@@ -46,9 +51,15 @@ export default function Login() {
     e.preventDefault();
     try {
       if (authType === "login") {
-        await signInWithEmailAndPassword(form.email, form.password);
+        const resp = await signInWithEmailAndPassword(
+          form.email,
+          form.password
+        );
+        localStorage.setItem("user", JSON.stringify(resp.user));
+        navigate("/");
       } else {
         await createUserWithEmailAndPassword(form.email, form.password);
+        navigate("/");
       }
     } catch (err) {
       console.log(err);
@@ -56,6 +67,18 @@ export default function Login() {
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  useEffect(() => {
+    if (error || error2) {
+      handleNotificationMsg({
+        msg: error?.message || error2?.message,
+        action: {
+          closable: true,
+        },
+        autoHideDuration: 4000,
+      });
+    }
+  }, [error, error2]);
 
   return (
     <Grid

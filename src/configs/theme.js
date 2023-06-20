@@ -10,6 +10,13 @@ const lightTheme = createTheme({
   },
   typography: {
     fontFamily: "Poppins, sans-serif",
+    color: "#000",
+  },
+  navbar: {
+    main: "#808080",
+  },
+  linkText: {
+    color: "#fff",
   },
 });
 
@@ -17,6 +24,9 @@ const lightTheme = createTheme({
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
+  },
+  navbar: {
+    main: "#808080",
   },
   primary: {
     main: "#fff",

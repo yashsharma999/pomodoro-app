@@ -1,4 +1,4 @@
-import { createContext, useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../configs/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -9,8 +9,10 @@ export const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, loading, error] = useAuthState(auth);
 
+  const isAuthenticated = user || JSON.parse(localStorage.getItem("user"));
+
   useEffect(() => {
-    if (!user) {
+    if (!isAuthenticated) {
       return navigate("/login");
     }
   }, [user]);
@@ -18,6 +20,7 @@ export const AuthContextProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
+        isAuthenticated,
         user,
         loading,
         error,
@@ -28,4 +31,4 @@ export const AuthContextProvider = ({ children }) => {
   );
 };
 
-export const useAuth = () => React.useContext(AuthContext);
+export const useAuth = () => useContext(AuthContext);
