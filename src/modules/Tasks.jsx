@@ -93,7 +93,7 @@ export default function Tasks() {
       <TaskDialogue open={open} handleClose={handleClose} />{" "}
       <Container maxWidth={"lg"}>
         <AddTaskButton handleClickOpen={handleClickOpen} />
-        <Typography variant="h5" my={2}>
+        <Typography color={"primary"} variant="h5" my={2}>
           Tasks
         </Typography>
         <DataGrid

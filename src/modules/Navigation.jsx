@@ -6,6 +6,7 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Switch,
 } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useState } from "react";
@@ -13,8 +14,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSignOut } from "react-firebase-hooks/auth";
 import { auth } from "../configs/firebase";
 import { useAuth } from "../contexts/AuthContext";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { useThemeContext } from "../contexts/ThemeContext";
 
 export default function Navigation() {
+  const { handleThemeChange, themeMode } = useThemeContext();
   const theme = useTheme();
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -34,7 +39,11 @@ export default function Navigation() {
       direction={"row"}
       justifyContent={"space-between"}
       alignItems={"center"}
-      sx={{ background: `${theme.palette.primary.main}`, px: 2, py: 1 }}
+      sx={{
+        background: `${theme.navigation.main}`,
+        px: 2,
+        py: 1,
+      }}
     >
       <Box>
         <Stack direction={"row"} gap={2}>
@@ -62,8 +71,17 @@ export default function Navigation() {
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
+          <MenuItem>
+            <Stack direction={"row"} alignItems={"center"}>
+              <LightModeIcon />
+              <Switch
+                checked={themeMode === "dark"}
+                onChange={handleThemeChange}
+              />
+              <DarkModeIcon />
+            </Stack>
+          </MenuItem>
+
           <MenuItem
             onClick={async () => {
               localStorage.clear();

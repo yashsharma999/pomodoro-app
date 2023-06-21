@@ -18,6 +18,9 @@ const lightTheme = createTheme({
   linkText: {
     color: "#fff",
   },
+  navigation: {
+    main: "#1976d2",
+  },
 });
 
 // Dark theme
@@ -35,6 +38,13 @@ const darkTheme = createTheme({
     fontFamily: "Poppins, sans-serif",
     color: "#fff",
   },
+  navigation: {
+    main: "rgba(10, 25, 41, 0.8)",
+  },
+  linkText: {
+    color: "#fff",
+  },
 });
+//rgba(10, 25, 41, 0.8)
 
 export { lightTheme, darkTheme };

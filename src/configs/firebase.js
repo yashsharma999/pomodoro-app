@@ -4,13 +4,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCXDa8tmPMDjpPR66q7sAQ6NA7xY21Chw0",
-  authDomain: "pomodoro-app-ca5d2.firebaseapp.com",
-  projectId: "pomodoro-app-ca5d2",
-  storageBucket: "pomodoro-app-ca5d2.appspot.com",
-  messagingSenderId: "197721182418",
-  appId: "1:197721182418:web:d32c43f88d3091310d5d0b",
-  measurementId: "G-NC9CMHBQ70",
+  apiKey: import.meta.env.VITE_APP_API_KEY,
+  authDomain: import.meta.env.VITE_APP_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_APP_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_APP_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_APP_MESSAGING_SENDER_ID,
+  measurementId: import.meta.env.VITE_APP_MEASUREMENT_ID,
+  appId: import.meta.env.VITE_APP_APP_ID,
 };
 
 // Initialize Firebase

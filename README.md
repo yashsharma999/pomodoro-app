@@ -38,3 +38,9 @@
 ![Tasks](https://res.cloudinary.com/diby0hxng/image/upload/v1687363480/Screenshot_2023-06-21_at_9.32.10_PM_glabix.png)
 
 ![Analytics](https://res.cloudinary.com/diby0hxng/image/upload/v1687363480/Screenshot_2023-06-21_at_9.32.32_PM_v4apti.png)
+
+## Dark Mode
+
+![DarkMode](https://res.cloudinary.com/diby0hxng/image/upload/v1687370481/Screenshot_2023-06-21_at_11.30.48_PM_oxs2ky.png)
+
+![login](https://res.cloudinary.com/diby0hxng/image/upload/v1687370552/Screenshot_2023-06-21_at_11.32.01_PM_jenept.png)

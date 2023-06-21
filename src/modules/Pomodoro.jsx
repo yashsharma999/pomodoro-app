@@ -18,9 +18,11 @@ import { useState } from "react";
 import AddTaskButton from "../components/AddTaskButton";
 import TaskDialogue from "../components/TaskDialogue";
 import { useAuth } from "../contexts/AuthContext";
+import { useTheme } from "@emotion/react";
 
 export default function Pomodoro() {
   const navigate = useNavigate();
+  const theme = useTheme();
   const { isAuthenticated } = useAuth();
   const isMobile = useMediaQuery("(max-width: 576px)");
   const { currentTask, timeFormat, setTimeFormat } = useData();
@@ -79,7 +81,7 @@ export default function Pomodoro() {
                 alignItems="center"
                 gap={1}
               >
-                <InfoIcon />
+                <InfoIcon color={"primary"} />
                 <Typography
                   my={2}
                   textAlign={"left"}
@@ -106,7 +108,9 @@ export default function Pomodoro() {
         }}
       >
         <Stack direction={"row"} alignItems="center">
-          <Typography variant="caption">Minutes</Typography>
+          <Typography color={"primary"} variant="caption">
+            Minutes
+          </Typography>
           <Switch
             checked={timeFormat === "seconds"}
             onChange={(e) => {
@@ -117,11 +121,13 @@ export default function Pomodoro() {
               }
             }}
           />
-          <Typography variant="caption">Seconds</Typography>
+          <Typography color={"primary"} variant="caption">
+            Seconds
+          </Typography>
         </Stack>
 
         <br />
-        <Typography variant="caption">
+        <Typography variant="caption" color={"primary"}>
           This switch adjusts the pomodoro time to test the features
         </Typography>
       </div>

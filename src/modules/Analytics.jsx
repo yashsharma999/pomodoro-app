@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import GeneralStats from "../components/GeneralStats";
 import PomodoroAnalytics from "../components/PomodoroAnalytics";
@@ -7,6 +7,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 export default function Analytics() {
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const { isAuthenticated } = useAuth();
   if (!isAuthenticated) {
@@ -15,8 +16,20 @@ export default function Analytics() {
 
   return (
     <>
-      <Container maxWidth={"lg"}>
-        <Typography variant="h5" my={2}>
+      <Container
+        maxWidth={"lg"}
+        sx={{
+          background: `${theme.palette.background.default}`,
+        }}
+      >
+        <Typography
+          color={"primary"}
+          variant="h5"
+          sx={{
+            paddingTop: "1rem",
+            marginBottom: "1rem",
+          }}
+        >
           Analytics
         </Typography>
         <PomodoroAnalytics />

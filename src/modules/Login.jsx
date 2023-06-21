@@ -7,9 +7,11 @@ import {
   InputAdornment,
   InputLabel,
   Stack,
+  Switch,
   TextField,
   Typography,
   useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { useState } from "react";
 import {
@@ -23,8 +25,13 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useEffect } from "react";
 import { useNotification } from "../contexts/NotificationContext";
 import { useNavigate } from "react-router-dom";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { useThemeContext } from "../contexts/ThemeContext";
 
 export default function Login() {
+  const theme = useTheme();
+  const { handleThemeChange, themeMode } = useThemeContext();
   const navigate = useNavigate();
   const { handleNotificationMsg } = useNotification();
   const isSmall = useMediaQuery("(max-width: 576px)");
@@ -97,9 +104,24 @@ export default function Login() {
       justifyContent="center"
       alignItems={"center"}
       sx={{
+        position: "relative",
         height: "100vh",
+        backgroundColor: theme.palette.background.default,
       }}
     >
+      <Stack
+        direction={"row"}
+        alignItems={"center"}
+        sx={{
+          position: "absolute",
+          top: "0px",
+          right: "1rem",
+        }}
+      >
+        <LightModeIcon color="primary" />
+        <Switch checked={themeMode === "dark"} onChange={handleThemeChange} />
+        <DarkModeIcon color="primary" />
+      </Stack>
       <form
         style={{
           width: !isSmall ? "400px" : "100%",
@@ -108,7 +130,7 @@ export default function Login() {
         onSubmit={handleSubmit}
       >
         <Stack direction={"column"} gap={2}>
-          <Typography variant="h3">
+          <Typography variant="h3" color={theme.palette.primary.main}>
             {authType === "login" ? "👋 Welcome" : "Create an account"}
           </Typography>
           <Typography variant="subtitle1" color={"secondary"}>
@@ -154,18 +176,33 @@ export default function Login() {
             {authType === "login" ? "Sign In" : "Sign Up"}
           </Button>
           <Divider sx={{ my: 2 }}>
-            <Typography variant="body2">OR</Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                color: theme.palette.primary.main,
+              }}
+            >
+              OR
+            </Typography>
           </Divider>
           <Button variant="contained" onClick={handleGoogleAuth}>
             Sign in with Google
           </Button>
           {authType === "login" ? (
-            <Typography>
+            <Typography
+              sx={{
+                color: theme.palette.primary.main,
+              }}
+            >
               Don't have an account?
               <Button onClick={() => setAuthType("signup")}>Sign Up</Button>
             </Typography>
           ) : (
-            <Typography>
+            <Typography
+              sx={{
+                color: theme.palette.primary.main,
+              }}
+            >
               Already have an account?
               <Button onClick={() => setAuthType("login")}>Sign In</Button>
             </Typography>

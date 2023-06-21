@@ -112,9 +112,9 @@ export default function PomodoroAnalytics() {
         label: "Pomodoros",
         data: labels.map((label) => pomodoroData[label]?.pomodoros ?? 0),
         backgroundColor: theme.palette.primary.main,
+        borderColor: "#fff",
       },
     ],
-    backgroundColor: "rgba(75, 192, 192, 0.2)",
   };
 
   const options = {
