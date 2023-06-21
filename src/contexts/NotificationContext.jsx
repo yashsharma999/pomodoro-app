@@ -5,25 +5,6 @@ import { createContext } from "react";
 
 const NotificationContext = createContext();
 
-// type Notification = {
-//   msg: string;
-//   action?: {
-//     btnText?: string;
-//     onClick?: () => void;
-//     closable?: boolean;
-//   } | null;
-//   anchorOrigin?: {
-//     vertical: 'top' | 'bottom';
-//     horizontal: 'left' | 'center' | 'right';
-//   };
-//   style?: {
-//     background?: string;
-//     color?: string;
-//     fontFamily?: string;
-//   };
-//   autoHideDuration?: 1000 | 2000 | 3000 | 4000 | 5000 | 6000;
-// };
-
 export const NotificationContextProvider = ({ children }) => {
   const [open, setOpen] = React.useState(false);
   const [notification, setNotification] = React.useState({

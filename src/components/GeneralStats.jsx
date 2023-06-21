@@ -10,12 +10,14 @@ export default function GeneralStats() {
   const [totalTasks, setTotalTasks] = useState(0);
 
   const getData = async () => {
-    const docRef = doc(db, "analytics", isAuthenticated?.uid);
-    const taskRef = doc(db, "tasks", isAuthenticated?.uid);
-    const docSnap = await getDoc(docRef);
-    const taskSnap = await getDoc(taskRef);
-    setTotalPomodoros(docSnap.data().pomodoroCompletion.length);
-    setTotalTasks(taskSnap.data().tasks.length);
+    try {
+      const docRef = doc(db, "analytics", isAuthenticated?.uid);
+      const taskRef = doc(db, "tasks", isAuthenticated?.uid);
+      const docSnap = await getDoc(docRef);
+      const taskSnap = await getDoc(taskRef);
+      setTotalPomodoros(docSnap.data().pomodoroCompletion.length);
+      setTotalTasks(taskSnap.data().tasks.length);
+    } catch (err) {}
   };
 
   useEffect(() => {

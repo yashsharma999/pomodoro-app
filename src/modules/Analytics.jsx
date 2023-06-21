@@ -1,9 +1,18 @@
 import { Container, Grid, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import GeneralStats from "../components/GeneralStats";
 import PomodoroAnalytics from "../components/PomodoroAnalytics";
 import TaskCompletionRatio from "../components/TaskCompletionRatio";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Analytics() {
+  const navigate = useNavigate();
+
+  const { isAuthenticated } = useAuth();
+  if (!isAuthenticated) {
+    return navigate("/login");
+  }
+
   return (
     <>
       <Container maxWidth={"lg"}>

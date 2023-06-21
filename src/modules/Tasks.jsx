@@ -25,6 +25,10 @@ export default function Tasks() {
   const { isAuthenticated } = useAuth();
   const isSmallDevice = useMediaQuery("(max-width: 576px)");
 
+  if (!isAuthenticated) {
+    return navigate("/login");
+  }
+
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {

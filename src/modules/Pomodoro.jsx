@@ -17,9 +17,11 @@ import InfoIcon from "@mui/icons-material/Info";
 import { useState } from "react";
 import AddTaskButton from "../components/AddTaskButton";
 import TaskDialogue from "../components/TaskDialogue";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Pomodoro() {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const isMobile = useMediaQuery("(max-width: 576px)");
   const { currentTask, timeFormat, setTimeFormat } = useData();
 

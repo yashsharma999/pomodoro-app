@@ -15,6 +15,7 @@ import { useState } from "react";
 import {
   useSignInWithEmailAndPassword,
   useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import { auth } from "../configs/firebase";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -31,6 +32,7 @@ export default function Login() {
     useSignInWithEmailAndPassword(auth);
   const [createUserWithEmailAndPassword, user2, loading2, error2] =
     useCreateUserWithEmailAndPassword(auth);
+  const [signInWithGoogle, user3, loading3, error3] = useSignInWithGoogle(auth);
 
   const [authType, setAuthType] = useState("login");
   const [form, setForm] = useState({
@@ -61,6 +63,15 @@ export default function Login() {
         await createUserWithEmailAndPassword(form.email, form.password);
         navigate("/");
       }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleGoogleAuth = async () => {
+    try {
+      await signInWithGoogle();
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
@@ -145,7 +156,9 @@ export default function Login() {
           <Divider sx={{ my: 2 }}>
             <Typography variant="body2">OR</Typography>
           </Divider>
-          <Button variant="contained">Sign in with Google</Button>
+          <Button variant="contained" onClick={handleGoogleAuth}>
+            Sign in with Google
+          </Button>
           {authType === "login" ? (
             <Typography>
               Don't have an account?

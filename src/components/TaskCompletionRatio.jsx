@@ -30,21 +30,23 @@ export default function TaskCompletionRatio() {
   };
 
   const getData = async () => {
-    const docRef = doc(db, "tasks", isAuthenticated?.uid);
-    const docSnap = await getDoc(docRef);
-    let completed = 0;
-    let pending = 0;
-    docSnap.data().tasks.forEach((item) => {
-      if (item.completed) {
-        completed++;
-      } else {
-        pending++;
-      }
-    });
-    setTaskRatio({
-      completed: completed,
-      pending: pending,
-    });
+    try {
+      const docRef = doc(db, "tasks", isAuthenticated?.uid);
+      const docSnap = await getDoc(docRef);
+      let completed = 0;
+      let pending = 0;
+      docSnap.data().tasks.forEach((item) => {
+        if (item.completed) {
+          completed++;
+        } else {
+          pending++;
+        }
+      });
+      setTaskRatio({
+        completed: completed,
+        pending: pending,
+      });
+    } catch (err) {}
   };
 
   useEffect(() => {

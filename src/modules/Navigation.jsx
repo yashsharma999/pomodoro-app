@@ -12,9 +12,11 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignOut } from "react-firebase-hooks/auth";
 import { auth } from "../configs/firebase";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Navigation() {
   const theme = useTheme();
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [signOut, loading, error] = useSignOut(auth);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -49,7 +51,7 @@ export default function Navigation() {
       </Box>
       <Box>
         <IconButton onClick={handleClick}>
-          <Avatar></Avatar>
+          <Avatar src={isAuthenticated?.photoURL ?? ""}></Avatar>
         </IconButton>
         <Menu
           id="basic-menu"
