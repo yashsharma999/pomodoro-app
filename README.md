@@ -8,6 +8,8 @@
   - The list of tasks
 - Analytics
   - Analytics of the tasks and pomodoro stats
+- Notifications
+  - Notification after pomodoro completion with a quote
 
 # Structure
 
