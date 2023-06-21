@@ -12,6 +12,7 @@ import Pomodoro from "./modules/Pomodoro.jsx";
 import Tasks from "./modules/Tasks.jsx";
 import AddTask from "./modules/AddTask.jsx";
 import { DataContextProvider } from "./contexts/DataContext.jsx";
+import Analytics from "./modules/Analytics.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                   <Route path="/" element={<Pomodoro />} />
                   <Route path="/tasks" element={<Tasks />} />
                   <Route path="/add-task" element={<AddTask />} />
+                  <Route path="/analytics" element={<Analytics />} />
                 </Route>
                 <Route path="/login" element={<Login />} />
               </Routes>

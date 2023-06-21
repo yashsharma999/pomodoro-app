@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Navigation />
-      <Container maxWidth={"lg"}>
+      <Container maxWidth={"lg"} sx={{ paddingBottom: "1rem" }}>
         <Outlet />
       </Container>
     </>

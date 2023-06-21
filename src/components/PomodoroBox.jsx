@@ -57,12 +57,13 @@ export default function PomodoroBox({ disabled }) {
     return () => clearInterval(timer);
   }, [start]);
 
-  const handlePomodoroComplete = () => {
+  const handlePomodoroComplete = async () => {
     setStart(false);
     setIsRunning(false);
 
     //update pomodoro count in firebase
     const docRef = doc(db, "tasks", isAuthenticated.uid);
+    const analyticsRef = doc(db, "analytics", isAuthenticated.uid);
     if (time !== LONG_BREAK && time !== SHORT_BREAK) {
       getDoc(docRef).then((docSnapshot) => {
         if (docSnapshot.exists()) {
@@ -80,6 +81,16 @@ export default function PomodoroBox({ disabled }) {
           });
         }
       });
+      //update pomodoro completion in firebase
+      await setDoc(
+        analyticsRef,
+        {
+          pomodoroCompletion: arrayUnion(new Date()),
+        },
+        {
+          merge: true,
+        }
+      );
     }
 
     setKey((prevKey) => prevKey + 1);
@@ -91,17 +102,6 @@ export default function PomodoroBox({ disabled }) {
     } else {
       setTime(POMODORO);
     }
-
-    // if (taskListener?.sessions % 4 === 0) {
-    //   console.log(taskListener?.sessions);
-    //   setTime(LONG_BREAK);
-    // } else {
-    //   if (time === POMODORO) {
-    //     setTime(SHORT_BREAK);
-    //   } else {
-    //     setTime(POMODORO);
-    //   }
-    // }
   };
 
   return (
