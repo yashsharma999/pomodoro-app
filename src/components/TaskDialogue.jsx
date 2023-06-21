@@ -1,7 +1,7 @@
 import { Dialog } from "@mui/material";
 import AddTask from "../modules/AddTask";
 
-export default function AddTaskDialogue({ handleClose, open }) {
+export default function TaskDialogue({ handleClose, open, edit, task }) {
   return (
     <Dialog
       onClose={handleClose}
@@ -14,7 +14,7 @@ export default function AddTaskDialogue({ handleClose, open }) {
         },
       }}
     >
-      <AddTask closeDialog={handleClose} />
+      <AddTask closeDialog={handleClose} editTask={edit} task={task} />
     </Dialog>
   );
 }

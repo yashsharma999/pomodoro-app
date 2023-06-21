@@ -13,9 +13,9 @@ import PomodoroBox from "../components/pomodoroBox";
 import { useData } from "../contexts/DataContext";
 import { formatDistanceToNow } from "date-fns";
 import InfoIcon from "@mui/icons-material/Info";
-import AddTaskDialogue from "../components/AddTaskDialogue";
 import { useState } from "react";
 import AddTaskButton from "../components/AddTaskButton";
+import TaskDialogue from "../components/TaskDialogue";
 
 export default function Pomodoro() {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function Pomodoro() {
 
   return (
     <>
-      <AddTaskDialogue open={open} handleClose={handleClose} />{" "}
+      <TaskDialogue open={open} handleClose={handleClose} />{" "}
       <Stack px={!isMobile && 2} justifyContent="center" alignItems={"center"}>
         <Container maxWidth={"sm"}>
           {currentTask ? (

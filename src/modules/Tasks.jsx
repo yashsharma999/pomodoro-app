@@ -1,10 +1,7 @@
 import {
-  Box,
   Button,
-  Checkbox,
   Container,
-  Dialog,
-  DialogTitle,
+  Stack,
   Typography,
   useMediaQuery,
 } from "@mui/material";
@@ -15,11 +12,12 @@ import { db } from "../configs/firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { doc } from "firebase/firestore";
 import { useState } from "react";
-import AddTask from "./AddTask";
 import StatusCheckbox from "../components/StatusCheckbox";
 import { useData } from "../contexts/DataContext";
 import AddTaskButton from "../components/AddTaskButton";
-import AddTaskDialogue from "../components/AddTaskDialogue";
+import EditTask from "../components/EditTask";
+import DeleteTask from "../components/DeleteTask";
+import TaskDialogue from "../components/TaskDialogue";
 
 export default function Tasks() {
   const navigate = useNavigate();
@@ -49,14 +47,17 @@ export default function Tasks() {
     {
       field: "completed",
       headerName: "Completed",
-      width: 200,
+      width: 150,
       renderCell: (params) => (
-        <StatusCheckbox completed={params.row.completed} />
+        <StatusCheckbox
+          completed={params.row.completed}
+          id={params.row.taskId}
+        />
       ),
     },
     {
-      field: "action",
-      headerName: "Action",
+      field: "pomodoro",
+      headerName: "Pomodoro",
       width: 100,
       renderCell: (params) => (
         <Button
@@ -66,21 +67,35 @@ export default function Tasks() {
             navigate("/");
           }}
         >
-          View
+          Start
         </Button>
+      ),
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 100,
+      renderCell: (params) => (
+        <Stack direction={"row"} alignItems="center">
+          <EditTask task={params.row} />
+          <DeleteTask taskId={params.row.taskId} />
+        </Stack>
       ),
     },
   ];
 
   return (
     <>
-      <AddTaskDialogue open={open} handleClose={handleClose} />{" "}
+      <TaskDialogue open={open} handleClose={handleClose} />{" "}
       <Container maxWidth={"lg"}>
         <AddTaskButton handleClickOpen={handleClickOpen} />
         <Typography variant="h5" my={2}>
           Tasks
         </Typography>
         <DataGrid
+          sx={{
+            minHeight: "100px",
+          }}
           getRowId={(row) => row?.taskId}
           rows={taskList ?? []}
           columns={columns}
