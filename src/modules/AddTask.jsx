@@ -85,6 +85,7 @@ export default function AddTask({ closeDialog, editTask, task }) {
               name="title"
               value={form.title}
               onChange={handleChange}
+              required
             />
           </Stack>
           <Stack spacing={1}>
@@ -93,6 +94,7 @@ export default function AddTask({ closeDialog, editTask, task }) {
               name="description"
               value={form.description}
               onChange={handleChange}
+              required
             />
           </Stack>
           <Stack spacing={1}>
@@ -102,6 +104,7 @@ export default function AddTask({ closeDialog, editTask, task }) {
               name="dueDate"
               value={form.dueDate}
               onChange={handleChange}
+              required
             />
           </Stack>
           <Stack spacing={1}>

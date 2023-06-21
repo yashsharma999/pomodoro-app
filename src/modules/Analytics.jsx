@@ -11,7 +11,7 @@ export default function Analytics() {
           Analytics
         </Typography>
         <PomodoroAnalytics />
-        <Grid container spacing={1} mt={2}>
+        <Grid container spacing={2} mt={2}>
           <Grid item xs={12} md={6}>
             <TaskCompletionRatio />
           </Grid>

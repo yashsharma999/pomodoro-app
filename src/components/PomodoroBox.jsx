@@ -17,17 +17,25 @@ import { useAuth } from "../contexts/AuthContext";
 import { doc, getDoc, setDoc, arrayUnion } from "firebase/firestore";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useDocument } from "react-firebase-hooks/firestore";
-
-let POMODORO = 25;
-let SHORT_BREAK = 5;
-let LONG_BREAK = 15;
+import { POMODORO, SHORT_BREAK, LONG_BREAK, quotes } from "../constants";
+import { useNotification } from "../contexts/NotificationContext";
 
 export default function PomodoroBox({ disabled }) {
   const theme = useTheme();
+  const { handleNotificationMsg } = useNotification();
   const { isAuthenticated } = useAuth();
-  const { currentTask } = useData();
+  const { currentTask, timeFormat } = useData();
   const [key, setKey] = useState(0);
   const [time, setTime] = useState(POMODORO);
+
+  useEffect(() => {
+    if (timeFormat === "seconds") {
+      setTime(POMODORO);
+    } else {
+      setTime(POMODORO * 60);
+    }
+  }, [timeFormat]);
+
   const [start, setStart] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
   //listen for changes in currentTask
@@ -57,6 +65,12 @@ export default function PomodoroBox({ disabled }) {
     return () => clearInterval(timer);
   }, [start]);
 
+  function getRandomQuote(quotes) {
+    var randomIndex = Math.floor(Math.random() * quotes.length);
+    var randomQuote = quotes[randomIndex];
+    return randomQuote;
+  }
+
   const handlePomodoroComplete = async () => {
     setStart(false);
     setIsRunning(false);
@@ -78,6 +92,26 @@ export default function PomodoroBox({ disabled }) {
           };
           setDoc(docRef, {
             tasks: newArray,
+          });
+          handleNotificationMsg({
+            msg: (
+              <Stack>
+                <Typography variant="body2">Pomodoro Completed</Typography>
+                <Typography variant="body2">
+                  {getRandomQuote(quotes).quote}
+                </Typography>
+                <Typography variant="caption">
+                  - {getRandomQuote(quotes).author}
+                </Typography>
+              </Stack>
+            ),
+            action: {
+              closable: true,
+            },
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
           });
         }
       });

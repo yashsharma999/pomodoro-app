@@ -1,4 +1,4 @@
-import { Button, IconButton, Snackbar } from "@mui/material";
+import { Button, IconButton, Snackbar, Typography } from "@mui/material";
 import * as React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { createContext } from "react";
@@ -41,6 +41,9 @@ export const NotificationContextProvider = ({ children }) => {
 
   const action = (
     <React.Fragment>
+      {notification?.action?.quote && (
+        <Typography>{notification.action?.quote}</Typography>
+      )}
       {notification?.action?.btnText && (
         <Button
           color="secondary"

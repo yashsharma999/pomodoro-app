@@ -5,6 +5,7 @@ import {
   Container,
   Grid,
   Stack,
+  Switch,
   Typography,
   useMediaQuery,
 } from "@mui/material";
@@ -20,7 +21,7 @@ import TaskDialogue from "../components/TaskDialogue";
 export default function Pomodoro() {
   const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 576px)");
-  const { currentTask } = useData();
+  const { currentTask, timeFormat, setTimeFormat } = useData();
 
   const [open, setOpen] = useState(false);
 
@@ -32,7 +33,11 @@ export default function Pomodoro() {
   };
 
   return (
-    <>
+    <div
+      style={{
+        position: "relative",
+      }}
+    >
       <TaskDialogue open={open} handleClose={handleClose} />{" "}
       <Stack px={!isMobile && 2} justifyContent="center" alignItems={"center"}>
         <Container maxWidth={"sm"}>
@@ -89,6 +94,35 @@ export default function Pomodoro() {
           <PomodoroBox disabled={currentTask ? false : true} />
         </Container>
       </Stack>
-    </>
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          maxWidth: "150px",
+          display: isMobile ? "none" : "block",
+        }}
+      >
+        <Stack direction={"row"} alignItems="center">
+          <Typography variant="caption">Minutes</Typography>
+          <Switch
+            checked={timeFormat === "seconds"}
+            onChange={(e) => {
+              if (e.target.checked) {
+                setTimeFormat("seconds");
+              } else {
+                setTimeFormat("minutes");
+              }
+            }}
+          />
+          <Typography variant="caption">Seconds</Typography>
+        </Stack>
+
+        <br />
+        <Typography variant="caption">
+          This switch adjusts the pomodoro time to test the features
+        </Typography>
+      </div>
+    </div>
   );
 }
