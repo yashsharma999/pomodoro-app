@@ -10,6 +10,8 @@
   - Analytics of the tasks and pomodoro stats
 - Notifications
   - Notification after pomodoro completion with a quote
+- StarCanvas
+  - Star canvas in the login page
 
 # Structure
 
@@ -29,6 +31,7 @@
   - Charts.js (Analytics)
   - Date-fns (date utils)
   - MUI (component lib)
+  - Threejs (3d canvas)
 - Firebase (Backend)
 
 # Some Screenshots
