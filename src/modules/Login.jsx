@@ -28,6 +28,7 @@ import { useNavigate } from "react-router-dom";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useThemeContext } from "../contexts/ThemeContext";
+import StarsCanvas from "../components/StartCanvas";
 
 export default function Login() {
   const theme = useTheme();
@@ -105,10 +106,12 @@ export default function Login() {
       alignItems={"center"}
       sx={{
         position: "relative",
+        zIndex: "0",
         height: "100vh",
         backgroundColor: theme.palette.background.default,
       }}
     >
+      <StarsCanvas />
       <Stack
         direction={"row"}
         alignItems={"center"}
